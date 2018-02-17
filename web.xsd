@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://www.epam.tc.com/Web"
+xmlns:tns="https://www.epam.tc.com/Web">
+    <element name="web-app">
+        <complexType>
+            <choice maxOccurs="unbounded">
+                <element name="display-name" type="string" maxOccurs="unbounded"/>
+                <element name="welcome-file-list" maxOccurs="unbounded">
+                    <complexType>
+                        <sequence>
+                            <element name="welcome-file" type="anyURI" maxOccurs="unbounded"/>
+                        </sequence>
+                    </complexType>
+                </element>
+                <element name="filter" maxOccurs="unbounded">
+                    <complexType>
+                        <sequence>
+                            <element name="filter-name" type="string"/>
+                            <element name="filter-class" type="string"/>
+                            <element name="init-param" minOccurs="0" maxOccurs="unbounded">
+                                <complexType>
+                                    <sequence>
+                                        <element name="param-name"/>
+                                        <element name="param-value"/>
+                                    </sequence>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+                <element name="filter-mapping" maxOccurs="unbounded">
+                    <complexType>
+                        <sequence>
+                            <element name="filter-name" type="string"/>
+                            <element name="url-pattern" type="anyURI"/>
+                            <element name="dispatcher">
+                                <simpleType>
+                                    <restriction base="string">
+                                        <enumeration value="REQUEST"/>
+                                        <enumeration value="INCLUDE"/>
+                                        <enumeration value="FORWARD"/>
+                                    </restriction>
+                                </simpleType>
+                            </element>
+                        </sequence>
+                    </complexType>   
+                </element>
+                <element name="listener" maxOccurs="unbounded">
+                    <complexType>
+                        <sequence>
+                            <element name="listener-class" type="string"/>
+                        </sequence>
+                    </complexType>
+                </element>
+                <element name="servlet" maxOccurs="unbounded">
+                    <complexType>
+                        <sequence>
+                            <element name="servlet-name" type="string"/>
+                            <element name="servlet-class" type="string"/>
+                            <element name="init-param" minOccurs="0" maxOccurs="unbounded">
+                                <complexType>
+                                    <sequence>
+                                        <element name="param-name"/>
+                                        <element name="param-value"/>
+                                    </sequence>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+                <element name="servlet-mapping" maxOccurs="unbounded">
+                    <complexType>
+                        <sequence>
+                            <element name="servlet-name" type="string"/>
+                            <element name="url-pattern">
+                                <simpleType>
+                                    <restriction base="anyURI">
+                                        <pattern value="/.+"/>
+                                    </restriction>
+                                </simpleType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+                <element name="error-page" maxOccurs="unbounded">
+                    <complexType>
+                        <sequence>
+                            <choice>
+                                <element name="exception-type" type="string"/>
+                                <element name="error-code" type="integer"/>
+                            </choice>
+                            <element name="location">
+                                <simpleType>
+                                    <restriction base="anyURI">
+                                        <pattern value="/.+"/>
+                                    </restriction>
+                                </simpleType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                </element>
+            </choice>
+        </complexType>    
+    </element>
+</schema>
